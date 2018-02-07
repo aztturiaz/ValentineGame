@@ -165,7 +165,7 @@ public class MenuScreen extends AbstractGameScreen
     private Table buildControlsLayer ()
     {
         Table layer = new Table();
-        layer.right().bottom();
+        layer.center().bottom();
         // + Play Button
         btnMenuPlay = new Button(skinValentine18, "play");
         layer.add(btnMenuPlay);
@@ -175,6 +175,7 @@ public class MenuScreen extends AbstractGameScreen
                 onPlayClicked();
             }
         });
+        /*
         layer.row();
         // + Options Button
         btnMenuOptions = new Button(skinValentine18, "options");
@@ -184,7 +185,7 @@ public class MenuScreen extends AbstractGameScreen
             public void changed (ChangeEvent event, Actor actor) {
                 onOptionsClicked();
             }
-        });
+        });*/
         if (debugEnabled) layer.debug();
         return layer;
     }

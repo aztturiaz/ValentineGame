@@ -13,28 +13,28 @@ background
   index: -1
 options-dn
   rotate: false
-  xy: 154, 2
+  xy: 2, 2
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
 options-up
   rotate: false
-  xy: 458, 2
+  xy: 306, 2
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
 play-dn
   rotate: false
-  xy: 2, 2
+  xy: 154, 2
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
 play-up
   rotate: false
-  xy: 306, 2
+  xy: 458, 2
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
