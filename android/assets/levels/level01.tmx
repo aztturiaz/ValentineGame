@@ -2,10 +2,34 @@
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="150" height="20" tilewidth="48" tileheight="48" nextobjectid="1">
  <tileset firstgid="1" name="level01" tilewidth="48" tileheight="48" tilecount="12" columns="6">
   <image source="tileset_valentine_01.png" trans="ffffff" width="288" height="96"/>
+  <tile id="0">
+   <properties>
+    <property name="ceiling" type="bool" value="true"/>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="ceiling" type="bool" value="true"/>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
  <layer name="Tiledmap" width="150" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt1t0KgCAMhmER7/+aO7GTcEvX8vd9YCeBsbaPMAQAAAAAAAAAAADsJOVaVVIK48RcFjPsMypFzvryyoK0T6+eavrScqXlzNJb7fPT3HPQslCalbQPz1xZ39WSK2uP0pkv37sK7Z6h5ek5m9KspH3slquaGZ52n7POd1SuajP/xjNXXjPcyWq58tqV9Xtb/+fkaq5ctd7NeuXqj9rRrLlqPUuu5nIB/UMENQ==
+   eJztluEKgCAMBiN6/2fuVxCmtc25Wd2BEILavl3hsgAAAAAAAAAAAAAAAOjZGs9wZTOO3vPeQkQmX2Q1jt7zLGT0U5PJXz2r1RzhlZcLno5LHbXmU3pmeTfpfDY9GVl6eeRwt76WVasfnl5J94rMqzxTOp/BuUeeXknuG5Kca1m1+vE1r6x326dv8el/11pbzt2t93TJcxxEeSV1vmSkVyP2HEm2MzN6Ze2VV73a/zlezeWV9m4W5dXIDKPIrjfTK+1avJITUdMO0gIGjQ==
   </data>
  </layer>
 </map>

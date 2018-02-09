@@ -193,6 +193,7 @@ public class GameController extends InputAdapter
         float cellX, cellY;
         int absCellX, absCellY;
         boolean validFloorCollision = false, validTopCollision = false, validSideCollision = false;
+        boolean isFloor = false;
 
         TiledMapTileLayer.Cell tiledMapCell;
 
@@ -209,9 +210,11 @@ public class GameController extends InputAdapter
         absCellY = MathUtils.floor(cellY);
 
         tiledMapCell = tiledMapTileLayer.getCell(absCellX, absCellY);
+        isFloor = tiledMapCell !=null ? tiledMapCell.getTile().getProperties().containsKey("floor") : false;
 
-        if(tiledMapCell != null)
+        if(isFloor)
         {
+
             handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.FLOOR);
             validFloorCollision = true;
         }
@@ -227,8 +230,9 @@ public class GameController extends InputAdapter
             absCellY = MathUtils.floor(cellY);
 
             tiledMapCell = tiledMapTileLayer.getCell(absCellX, absCellY);
+            isFloor = tiledMapCell !=null ? tiledMapCell.getTile().getProperties().containsKey("floor") : false;
 
-            if(tiledMapCell != null)
+            if(isFloor)
             {
                 handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.FLOOR);
             }
@@ -340,7 +344,6 @@ public class GameController extends InputAdapter
         boolean collisionDetected =
                 Intersector.intersectRectangles(
                         new Rectangle((player.position.x + player.bounds.x), (player.position.y + player.bounds.y), player.bounds.width, player.bounds.height),
-                        //new Rectangle(player.bounds.x, player.bounds.y, player.bounds.width, player.bounds.height),
                         new Rectangle(cellLevelX, cellLevelY, CELL_SIZE, CELL_SIZE),
                         intersection);
 

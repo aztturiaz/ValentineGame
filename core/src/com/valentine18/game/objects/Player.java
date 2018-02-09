@@ -69,7 +69,7 @@ public class Player extends AbstractGameObject
         // View direction
         viewDirection = VIEW_DIRECTION.RIGHT;
         // Jump state
-        jumpState = JUMP_STATE.FALLING;
+        jumpState = JUMP_STATE.GROUNDED;
         timeJumping = 0;
         // Power-ups
         hasFeatherPowerup = false;

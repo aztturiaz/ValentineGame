@@ -43,7 +43,7 @@ public class Level
     {
         // Player character
         player = new Player();
-        player.position.set(0,250);
+        player.position.set(0,240);
 
         /*
         // Objects
