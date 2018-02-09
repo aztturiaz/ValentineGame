@@ -4,15 +4,13 @@ package com.valentine18.game.core;
  * Created by Aztturiaz on 05/02/2018.
  */
 
-public class Constants
+public final class Constants
 {
     // Visible game world is 5 meters wide
-    //public static final float VIEWPORT_WIDTH = 5.0f;
-    public static final float VIEWPORT_WIDTH = 400.0f;
+    public static final float VIEWPORT_WIDTH = 800.0f;
 
     // Visible game world is 5 meters tall
-    //public static final float VIEWPORT_HEIGHT = 5.0f;
-    public static final float VIEWPORT_HEIGHT = 240.0f;
+    public static final float VIEWPORT_HEIGHT = 500.0f;
 
     // GUI Width
     public static final float VIEWPORT_GUI_WIDTH = 800.0f;
@@ -38,4 +36,14 @@ public class Constants
 
     // Preferences Filename
     public static final String PREFERENCES = "preferences.pref";
+
+    // Delay after game over
+    public static final float TIME_DELAY_GAME_OVER = 3;
+
+    // Amount of lives at game start
+    public static final int LIVES_START = 3;
+
+    // TODO: Verify if significant value
+    public static final float CELL_SIZE = 48.0f;
+
 }

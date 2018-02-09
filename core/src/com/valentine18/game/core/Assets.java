@@ -17,8 +17,9 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class Assets implements Disposable, AssetErrorListener
 {
-    /*
+
     public PlayerAsset player;
+    /*
     public RockAsset rock;
     public GoldenCoinAsset goldenCoin;
     public FeatherAsset feather;
@@ -41,6 +42,7 @@ public class Assets implements Disposable, AssetErrorListener
     public void init (AssetManager assetManager)
     {
         this.assetManager = assetManager;
+
         loadAssets();
 
         TextureAtlas atlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS);
@@ -53,8 +55,9 @@ public class Assets implements Disposable, AssetErrorListener
 
         // create game resource objects
         fonts = new AssetFonts();
-        /*
+
         player = new PlayerAsset(atlas);
+        /*
         rock = new RockAsset(atlas);
         levelDecoration = new LevelDecorationAsset(atlas);
         feather = new FeatherAsset(atlas);

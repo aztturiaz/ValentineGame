@@ -1,0 +1,34 @@
+
+valentine18.pack.png
+size: 66,102
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Liz_jump
+  rotate: false
+  xy: 34, 2
+  size: 30, 48
+  orig: 30, 48
+  offset: 0, 0
+  index: -1
+Liz_walk
+  rotate: false
+  xy: 2, 52
+  size: 30, 48
+  orig: 30, 48
+  offset: 0, 0
+  index: 1
+Liz_walk
+  rotate: false
+  xy: 2, 2
+  size: 30, 48
+  orig: 30, 48
+  offset: 0, 0
+  index: 2
+Liz_walk
+  rotate: false
+  xy: 34, 52
+  size: 30, 48
+  orig: 30, 48
+  offset: 0, 0
+  index: 3

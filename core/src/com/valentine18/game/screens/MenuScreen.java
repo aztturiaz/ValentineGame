@@ -63,11 +63,6 @@ public class MenuScreen extends AbstractGameScreen
         Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        /*if(Gdx.input.isTouched())
-        {
-            game.setScreen(new GameScreen(game));
-        }*/
-
         if (debugEnabled)
         {
             debugRebuildStage -= deltaTime;
@@ -80,7 +75,6 @@ public class MenuScreen extends AbstractGameScreen
 
         stage.act(deltaTime);
         stage.draw();
-        //Table.drawDebug(stage); -- Deprecated, next line instead
         stage.setDebugAll(false);
     }
 
@@ -342,10 +336,10 @@ public class MenuScreen extends AbstractGameScreen
     private void onPlayClicked ()
     {
         //TODO: Remove comment and implement GameScreen
-        //game.setScreen(new GameScreen(game));
+        game.setScreen(new GameScreen(game));
     }
 
-    private void onOptionsClicked ()
+    private void onOptionsClicked()
     {
         loadSettings();
         btnMenuPlay.setVisible(false);

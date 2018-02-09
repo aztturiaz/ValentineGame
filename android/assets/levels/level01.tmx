@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="150" height="20" tilewidth="48" tileheight="48" nextobjectid="1">
- <tileset firstgid="1" name="level01" tilewidth="48" tileheight="48" tilecount="21" columns="21">
-  <image source="tileset_valentine_01.png" trans="ffffff" width="1024" height="64"/>
+ <tileset firstgid="1" name="level01" tilewidth="48" tileheight="48" tilecount="12" columns="6">
+  <image source="tileset_valentine_01.png" trans="ffffff" width="288" height="96"/>
  </tileset>
- <layer name="Tile Layer 1" width="150" height="20">
+ <layer name="Tiledmap" width="150" height="20">
   <data encoding="base64" compression="zlib">
-   eJztlsEKhDAMBQs9CH51P30vCosmsc3Gbq0zkIOF1vgySFMCAAAAAAAAAAAAAACAmVi2eiqLUfA/8lYeRphnNgrP+hLlgjbPqJ5q+rK8sjzz9Fa7/jb2HCwXpKy0eUR65T2rxStvj9qeX773KVj3jL3WlMpVzlJW2jxm86omw7fd574yK1n257hepJx7eXWcyQheec+a+b9V4ZD1fDpHO9t4Z1O+UbPyOiD9b/DqjODMVYmZRHvVejfr5dUdNSOKV82ZRHvVuhevxuIDZk8TJw==
+   eJzt1t0KgCAMhmER7/+aO7GTcEvX8vd9YCeBsbaPMAQAAAAAAAAAAADsJOVaVVIK48RcFjPsMypFzvryyoK0T6+eavrScqXlzNJb7fPT3HPQslCalbQPz1xZ39WSK2uP0pkv37sK7Z6h5ek5m9KspH3slquaGZ52n7POd1SuajP/xjNXXjPcyWq58tqV9Xtb/+fkaq5ctd7NeuXqj9rRrLlqPUuu5nIB/UMENQ==
   </data>
  </layer>
 </map>
