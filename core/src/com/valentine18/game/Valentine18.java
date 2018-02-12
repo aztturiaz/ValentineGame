@@ -4,7 +4,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.valentine18.game.core.Assets;
+import com.valentine18.game.core.assets.Assets;
 import com.valentine18.game.screens.MenuScreen;
 
 

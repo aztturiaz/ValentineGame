@@ -3,7 +3,7 @@ package com.valentine18.game.screens;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
-import com.valentine18.game.core.Assets;
+import com.valentine18.game.core.assets.Assets;
 
 /**
  * Created by Aztturiaz on 05/02/2018.

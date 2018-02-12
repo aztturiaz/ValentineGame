@@ -5,8 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.Array;
-import com.valentine18.game.objects.AbstractGameObject;
+import com.valentine18.game.core.assets.Assets;
 import com.valentine18.game.objects.Goal;
 import com.valentine18.game.objects.Player;
 

@@ -2,7 +2,8 @@ package com.valentine18.game.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.valentine18.game.core.Assets;
+import com.valentine18.game.core.assets.Assets;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
 import static com.valentine18.game.core.Constants.CELL_SIZE;
 
@@ -18,6 +19,8 @@ public class Player extends AbstractGameObject
     private final float JUMP_TIME_MIN = 0.1f;
     private final float JUMP_TIME_OFFSET_FLYING = JUMP_TIME_MAX - (0.018f);
 
+    private Animation walkAnimation;
+
     public enum VIEW_DIRECTION
     {
         LEFT,
@@ -32,7 +35,7 @@ public class Player extends AbstractGameObject
         JUMP_FALLING
     }
 
-    private TextureRegion regBody;
+    private TextureRegion regBody, regJumping;
 
     public VIEW_DIRECTION viewDirection;
     public float timeJumping;
@@ -49,7 +52,11 @@ public class Player extends AbstractGameObject
     {
         dimension.set(30,48);
 
+        walkAnimation = Assets.instance.player.playerWalk;
+        setAnimation(walkAnimation);
+
         regBody = Assets.instance.player.body;
+        regJumping = Assets.instance.player.jump;
         // Center image on game object
         origin.set(dimension.x / 2, dimension.y / 2);
 
@@ -108,8 +115,22 @@ public class Player extends AbstractGameObject
     {
         TextureRegion reg;
 
+        // TODO: Implement Texture according to JumpState or Velocity.x
+        // reg = this.regBody;
+
+        if(velocity.x == 0)
+        {
+            reg = this.regBody;
+        }
+        else
+        {
+            if(jumpState.equals(JUMP_STATE.GROUNDED))
+                reg = animation.getKeyFrame(stateTime, true);
+            else
+                reg = this.regJumping;
+        }
+
         // Draw image
-        reg = regBody;
         batch.draw(reg.getTexture(), position.x, position.y, origin.x,
                 origin.y, dimension.x, dimension.y, scale.x, scale.y, rotation,
                 reg.getRegionX(), reg.getRegionY(), reg.getRegionWidth(),

@@ -1,4 +1,4 @@
-package com.valentine18.game.core;
+package com.valentine18.game.core.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
-import com.valentine18.game.core.assets.LevelDecorationAssets;
+import com.valentine18.game.core.Constants;
 
 /**
  * Created by Aztturiaz on 05/02/2018.

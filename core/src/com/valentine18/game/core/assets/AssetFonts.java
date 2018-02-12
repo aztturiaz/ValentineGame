@@ -1,9 +1,10 @@
-package com.valentine18.game.core;
+package com.valentine18.game.core.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.utils.Disposable;
+import com.valentine18.game.core.Constants;
 
 /**
  * Created by Aztturiaz on 05/02/2018.

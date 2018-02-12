@@ -1,9 +1,11 @@
 package com.valentine18.game.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
 /**
  * Created by Aztturiaz on 07/02/2018.
@@ -23,6 +25,9 @@ public abstract class AbstractGameObject
     public Vector2 acceleration;
     public Rectangle bounds;
 
+    public float stateTime;
+    public Animation<TextureRegion> animation;
+
     public AbstractGameObject()
     {
         position = new Vector2();
@@ -40,6 +45,7 @@ public abstract class AbstractGameObject
 
     public void update(float deltaTime)
     {
+        stateTime += deltaTime;
         updateMotionX(deltaTime);
         updateMotionY(deltaTime);
         // Move to new position
@@ -88,6 +94,11 @@ public abstract class AbstractGameObject
         // Make sure the object's velocity does not exceed the
         // positive or negative terminal velocity
         velocity.y = MathUtils.clamp(velocity.y, - terminalVelocity.y, terminalVelocity.y);
+    }
+
+    public void setAnimation (Animation animation) {
+        this.animation = animation;
+        stateTime = 0;
     }
 
     public abstract void render(SpriteBatch batch);
