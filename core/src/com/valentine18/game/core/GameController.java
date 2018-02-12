@@ -9,7 +9,9 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.valentine18.game.objects.Goal;
 import com.valentine18.game.objects.Player;
 import com.valentine18.game.objects.Player.JUMP_STATE;
 import com.valentine18.game.screens.MenuScreen;
@@ -41,6 +43,8 @@ public class GameController extends InputAdapter
     public float scoreVisual;
 
     Player player = null;
+    Goal goal = null;
+    private boolean goalReached = false;
 
     public GameController(Game game)
     {
@@ -65,13 +69,14 @@ public class GameController extends InputAdapter
         scoreVisual = score;
         level = new Level();
         player = level.player;
+        goal = level.goal;
         cameraHelper.setTarget(player);
     }
 
     public void update(float deltaTime)
     {
         handleDebugInput(deltaTime);
-        if (isGameOver())
+        if (isGameOver() || goalReached)
         {
             timeLeftGameOverDelay -= deltaTime;
             if (timeLeftGameOverDelay < 0)
@@ -88,6 +93,7 @@ public class GameController extends InputAdapter
         testCollisions();
 
         cameraHelper.update(deltaTime);
+
         if (!isGameOver() && isPlayerInWater())
         {
             lives--;
@@ -133,8 +139,17 @@ public class GameController extends InputAdapter
         if (cameraHelper.hasTarget(player))
         {
             // Player Movement
-            // TODO: Remove Auto-movement
-            player.velocity.x = player.terminalVelocity.x;
+            // TODO: Remove Auto-movement if not needed
+            if(goalReached)
+            {
+                player.velocity.x = 0;
+                player.velocity.y = 0;
+            }
+            else
+            {
+                player.velocity.x = player.terminalVelocity.x;
+            }
+
             /*if (Gdx.input.isKeyPressed(Input.Keys.A))
             {
                 player.velocity.x = -player.terminalVelocity.x;
@@ -151,6 +166,7 @@ public class GameController extends InputAdapter
                     player.velocity.x = player.terminalVelocity.x;
                 }
             }*/
+
 
             // Player Jump
             if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.SPACE))
@@ -315,6 +331,21 @@ public class GameController extends InputAdapter
             }
         }
 
+        if(!goalReached)
+        {
+            Rectangle intersection = new Rectangle();
+
+            Intersector.intersectRectangles(
+                    new Rectangle(player.position.x + player.bounds.x, player.position.y, player.bounds.width, player.bounds.height),
+                    new Rectangle(goal.position.x + goal.bounds.x, goal.position.y + goal.bounds.y, goal.bounds.width, goal.bounds.height),
+                    intersection);
+
+            if(intersection.getWidth() > 0)
+            {
+                onCollisionPlayerWithGoal();
+            }
+        }
+
         /* // TODO: Implement similar collision for enemies
         // Test collision: Player <-> Gold Coins
         for (GoldenCoin goldenCoin : level.goldcoins)
@@ -332,6 +363,17 @@ public class GameController extends InputAdapter
             break;
         }
         */
+    }
+
+    private void onCollisionPlayerWithGoal()
+    {
+        goalReached = true;
+        timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_FINISHED;
+        /*
+        Vector2 centerPlayerPosition = new Vector2(level.player.position);
+        centerPlayerPosition.x += level.player.bounds.width;
+        */
+        player.velocity.x = 0;
     }
 
     private void handlePlayerCollision(int cellXPos, int cellYPos, CollisionCell.CellType cellType)

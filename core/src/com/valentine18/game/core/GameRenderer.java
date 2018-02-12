@@ -44,15 +44,18 @@ public class GameRenderer implements Disposable
         renderGui(batch);
     }
 
-    private void renderWorld (SpriteBatch batch) {
+    private void renderWorld (SpriteBatch batch)
+    {
         gameController.cameraHelper.applyTo(camera);
         batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-        gameController.level.player.render(batch);
-        batch.end();
-        // Render TileMap - Done after batch ends, because TiledMap implements it's own batch begin-end segment
+
+        // Render TileMap first - Done after batch ends, because TiledMap implements it's own batch begin-end segment
         // Just use the same SpriteBatch
         gameController.level.render(batch, camera);
+
+        batch.begin();
+        gameController.level.render(batch);
+        batch.end();
     }
 
     public void resize (int width, int height)

@@ -21,6 +21,9 @@ public final class Constants
     // Location of description file for texture atlas
     public static final String TEXTURE_ATLAS_OBJECTS = "images/valentine18.pack.atlas";
 
+    // Location of description file for texture atlas
+    public static final String TEXTURE_ATLAS_OBJECTS_02 = "levels/tileset_valentine_02.atlas";
+
     // Game UI Font
     public static final String GAME_UI_FONT = "images/arial-15.fnt";
 
@@ -43,7 +46,10 @@ public final class Constants
     // Amount of lives at game start
     public static final int LIVES_START = 3;
 
-    // TODO: Verify if significant value
+    // Cell Size for each cell in Tiled Map
     public static final float CELL_SIZE = 48.0f;
+
+    // Delay Time after game finished
+    public static final float TIME_DELAY_GAME_FINISHED = 6;
 
 }

@@ -335,7 +335,6 @@ public class MenuScreen extends AbstractGameScreen
 
     private void onPlayClicked ()
     {
-        //TODO: Remove comment and implement GameScreen
         game.setScreen(new GameScreen(game));
     }
 

@@ -1,35 +1,291 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="150" height="20" tilewidth="48" tileheight="48" nextobjectid="1">
- <tileset firstgid="1" name="level01" tilewidth="48" tileheight="48" tilecount="12" columns="6">
-  <image source="tileset_valentine_01.png" trans="ffffff" width="288" height="96"/>
+ <tileset firstgid="1" name="vgTileset2" tilewidth="48" tileheight="48" tilecount="64" columns="16">
+  <image source="tileset_valentine_01.png" trans="ffffff" width="768" height="192"/>
   <tile id="0">
    <properties>
-    <property name="ceiling" type="bool" value="true"/>
-    <property name="wall" type="bool" value="true"/>
+    <property name="floor" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
-    <property name="ceiling" type="bool" value="true"/>
-    <property name="wall" type="bool" value="true"/>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
     <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="spikes" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
     <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="9">
    <properties>
     <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
     <property name="wall" type="bool" value="true"/>
    </properties>
   </tile>
+  <tile id="11">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="13">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="14">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="28">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="29">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="30">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="37">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="39">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="44">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="45">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="47">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="48">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="49">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="50">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="51">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="52">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="54">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="55">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="56">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="57">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="58">
+   <properties>
+    <property name="wall" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="60">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
+  <tile id="62">
+   <properties>
+    <property name="floor" type="bool" value="true"/>
+   </properties>
+  </tile>
  </tileset>
+ <layer name="Background" width="150" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6HTUP9iJ2MfSFg1VVVVVVVVVVVVVVV9fs+O0vE=
+  </data>
+ </layer>
  <layer name="Tiledmap" width="150" height="20">
   <data encoding="base64" compression="zlib">
-   eJztluEKgCAMBiN6/2fuVxCmtc25Wd2BEILavl3hsgAAAAAAAAAAAAAAAOjZGs9wZTOO3vPeQkQmX2Q1jt7zLGT0U5PJXz2r1RzhlZcLno5LHbXmU3pmeTfpfDY9GVl6eeRwt76WVasfnl5J94rMqzxTOp/BuUeeXknuG5Kca1m1+vE1r6x326dv8el/11pbzt2t93TJcxxEeSV1vmSkVyP2HEm2MzN6Ze2VV73a/zlezeWV9m4W5dXIDKPIrjfTK+1avJITUdMO0gIGjQ==
+   eJztls0KwjAQhOOhN1+h3r0rIr5cH90KLoSwG/avacX5YJEqNunsZLqlAAAAAAAAAAAAAAAAAAAA2LmuNX3ruvNejs6jlOW0florst4jtOOxaPX5pWcawcVZHqbg/7keb91Piyb/6jPqy+eZKc/PzvKsG827TI9rPWrRRPKZ1WNSph8167mevJylgXrX8wKnVe3/mgyPE1qPWjTp+cyzt6mpyDnKpj6XXE+8vtLMHKRDzwucVlI/Ih6v6eV0i1ef1mcS92KfbbkzN691q2q9Xtq1ZuG3mfnuyey19lJGNnGlmTd63iU43aV+ZGQnlfZeWXpNzL3rDBo140bgehvJJk3mW7OQ4Pop9TniK+37vyVLLyl3vPOt9/0fYSsvZRaR7SvtbDbaV1LmZGg4ir09s6evrLPZKF95Mv0fffUG3AB8aQ==
   </data>
  </layer>
 </map>

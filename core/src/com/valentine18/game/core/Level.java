@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Array;
 import com.valentine18.game.objects.AbstractGameObject;
+import com.valentine18.game.objects.Goal;
 import com.valentine18.game.objects.Player;
 
 /**
@@ -18,6 +19,9 @@ public class Level
     public static final String TAG = Level.class.getName();
 
     public Player player;
+
+    // objects
+    public Goal goal;
 
     /*
     // objects
@@ -44,6 +48,10 @@ public class Level
         // Player character
         player = new Player();
         player.position.set(0,240);
+
+        // Objects
+        goal = new Goal();
+        goal.position.set(Constants.CELL_SIZE * 142,Constants.CELL_SIZE * 10);
 
         /*
         // Objects
@@ -83,9 +91,15 @@ public class Level
         Gdx.app.debug(TAG, "level loaded");
     }
 
-    /*
     public void render(SpriteBatch batch)
     {
+        // Draw Goal
+        goal.render(batch);
+
+        // Draw Player Character
+        player.render(batch);
+
+        /*
         // Draw Mountains
         mountains.render(batch);
 
@@ -107,10 +121,9 @@ public class Level
         // Draw Clouds
         clouds.render(batch);
 
-        // Draw Player Character
-        player.render(batch);
+        */
     }
-
+/*
     public void renderGoldenCoins(SpriteBatch batch)
     {
         // Draw Golden Coins

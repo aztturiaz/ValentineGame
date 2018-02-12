@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
+import com.valentine18.game.core.assets.LevelDecorationAssets;
 
 /**
  * Created by Aztturiaz on 05/02/2018.
@@ -19,12 +20,14 @@ public class Assets implements Disposable, AssetErrorListener
 {
 
     public PlayerAsset player;
+    public LevelDecorationAssets levelDecorations;
     /*
     public RockAsset rock;
     public GoldenCoinAsset goldenCoin;
     public FeatherAsset feather;
-    public LevelDecorationAsset levelDecoration;
     */
+
+
     public AssetFonts fonts;
 
 
@@ -53,13 +56,24 @@ public class Assets implements Disposable, AssetErrorListener
             t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         }
 
+        TextureAtlas levelDecorationAtlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS_02);
+
+        // enable texture filtering for pixel smoothing
+        for(Texture t : atlas.getTextures())
+        {
+            t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        }
+
         // create game resource objects
         fonts = new AssetFonts();
 
         player = new PlayerAsset(atlas);
+
+        // Level Decorations
+        levelDecorations = new LevelDecorationAssets(levelDecorationAtlas);
+
         /*
         rock = new RockAsset(atlas);
-        levelDecoration = new LevelDecorationAsset(atlas);
         feather = new FeatherAsset(atlas);
         goldenCoin = new GoldenCoinAsset(atlas);
         */
@@ -73,6 +87,11 @@ public class Assets implements Disposable, AssetErrorListener
         assetManager.setErrorListener(this);
         // load texture atlas
         assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS, TextureAtlas.class);
+        // start loading assets and wait until finished
+        assetManager.finishLoading();
+
+        // load texture atlas
+        assetManager.load(Constants.TEXTURE_ATLAS_OBJECTS_02, TextureAtlas.class);
         // start loading assets and wait until finished
         assetManager.finishLoading();
 
