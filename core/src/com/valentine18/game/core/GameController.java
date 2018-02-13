@@ -73,6 +73,11 @@ public class GameController extends InputAdapter
         cameraHelper.setTarget(player);
     }
 
+    private void restartLevel()
+    {
+        player.position.set(0,260);
+    }
+
     public void update(float deltaTime)
     {
         handleDebugInput(deltaTime);
@@ -100,16 +105,12 @@ public class GameController extends InputAdapter
             if (isGameOver())
                 timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_OVER;
             else
-                initLevel();
+                restartLevel();
         }
 
         // Lives Visual Effect
         if (livesVisual> lives)
             livesVisual = Math.max(lives, livesVisual - 1 * deltaTime);
-
-        // Score Visual Effect
-        if (scoreVisual< score)
-            scoreVisual = Math.min(score, scoreVisual + 250 * deltaTime);
     }
 
     private void handleDebugInput(float deltaTime)
@@ -167,7 +168,6 @@ public class GameController extends InputAdapter
                 }
             }*/
 
-
             // Player Jump
             if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.SPACE))
             {
@@ -208,8 +208,8 @@ public class GameController extends InputAdapter
         float xPos, yPos;
         float cellX, cellY;
         int absCellX, absCellY;
-        boolean validFloorCollision = false, validTopCollision = false, validSideCollision = false;
-        boolean isFloor = false;
+        boolean validFloorCollision = false, validSideCollision = false;
+        boolean isFloor, isSpike;
 
         TiledMapTileLayer.Cell tiledMapCell;
 
@@ -226,12 +226,12 @@ public class GameController extends InputAdapter
         absCellY = MathUtils.floor(cellY);
 
         tiledMapCell = tiledMapTileLayer.getCell(absCellX, absCellY);
-        isFloor = tiledMapCell !=null ? tiledMapCell.getTile().getProperties().containsKey("floor") : false;
+        isFloor = tiledMapCell != null ? tiledMapCell.getTile().getProperties().containsKey("floor") : false;
+        isSpike = tiledMapCell != null ? tiledMapCell.getTile().getProperties().containsKey("spikes") : false;
 
         if(isFloor)
         {
-
-            handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.FLOOR);
+            handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.FLOOR, isSpike);
             validFloorCollision = true;
         }
 
@@ -247,10 +247,11 @@ public class GameController extends InputAdapter
 
             tiledMapCell = tiledMapTileLayer.getCell(absCellX, absCellY);
             isFloor = tiledMapCell !=null ? tiledMapCell.getTile().getProperties().containsKey("floor") : false;
+            isSpike = tiledMapCell != null ? tiledMapCell.getTile().getProperties().containsKey("spikes") : false;
 
             if(isFloor)
             {
-                handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.FLOOR);
+                handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.FLOOR, isSpike);
             }
         }
 
@@ -266,9 +267,11 @@ public class GameController extends InputAdapter
 
         tiledMapCell = tiledMapTileLayer.getCell(absCellX, absCellY);
 
+        isSpike = tiledMapCell != null ? tiledMapCell.getTile().getProperties().containsKey("spikes") : false;
+
         if(tiledMapCell != null)
         {
-            handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.RIGHT);
+            handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.RIGHT, isSpike);
             validSideCollision = true;
         }
 
@@ -283,9 +286,11 @@ public class GameController extends InputAdapter
 
             tiledMapCell = tiledMapTileLayer.getCell(absCellX, absCellY);
 
+            isSpike = tiledMapCell != null ? tiledMapCell.getTile().getProperties().containsKey("spikes") : false;
+
             if(tiledMapCell != null)
             {
-                handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.RIGHT);
+                handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.RIGHT, isSpike);
             }
         }
 
@@ -295,21 +300,19 @@ public class GameController extends InputAdapter
             xPos = (player.position.x + player.bounds.x);
             yPos = player.position.y;
 
-            //Gdx.app.error(TAG, "Player position = (" + (player.position.x + player.bounds.x) + "," + (player.position.y + player.bounds.y) + ")");
-
             cellX = xPos / CELL_SIZE;
             cellY = yPos / CELL_SIZE;
 
             absCellX = MathUtils.floor(cellX);
             absCellY = MathUtils.floor(cellY);
 
-            //Gdx.app.debug(TAG, "Bottom Left Cell position = (" + (absCellX) + "," + (absCellY) + ")");
-
             tiledMapCell = tiledMapTileLayer.getCell(absCellX, absCellY);
+
+            isSpike = tiledMapCell != null ? tiledMapCell.getTile().getProperties().containsKey("spikes") : false;
 
             if(tiledMapCell != null)
             {
-                handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.LEFT);
+                handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.LEFT, isSpike);
                 validSideCollision = true;
             }
         }
@@ -325,9 +328,11 @@ public class GameController extends InputAdapter
 
             tiledMapCell = tiledMapTileLayer.getCell(absCellX, absCellY);
 
+            isSpike = tiledMapCell != null ? tiledMapCell.getTile().getProperties().containsKey("spikes") : false;
+
             if(tiledMapCell != null)
             {
-                handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.LEFT);
+                handlePlayerCollision(absCellX, absCellY, CollisionCell.CellType.LEFT, isSpike);
             }
         }
 
@@ -369,14 +374,10 @@ public class GameController extends InputAdapter
     {
         goalReached = true;
         timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_FINISHED;
-        /*
-        Vector2 centerPlayerPosition = new Vector2(level.player.position);
-        centerPlayerPosition.x += level.player.bounds.width;
-        */
         player.velocity.x = 0;
     }
 
-    private void handlePlayerCollision(int cellXPos, int cellYPos, CollisionCell.CellType cellType)
+    private void handlePlayerCollision(int cellXPos, int cellYPos, CollisionCell.CellType cellType, boolean isSpike)
     {
         float cellLevelX = cellXPos * CELL_SIZE;
         float cellLevelY = cellYPos * CELL_SIZE;
@@ -390,6 +391,13 @@ public class GameController extends InputAdapter
                         intersection);
 
         if(!collisionDetected) return;
+
+        if(isSpike)
+        {
+            if(isGameOver()) return;
+            onSpikesCollision();
+            return;
+        }
 
         switch(cellType)
         {
@@ -426,6 +434,20 @@ public class GameController extends InputAdapter
         }
     }
 
+    private void onSpikesCollision()
+    {
+        lives--;
+        player.jumpState = JUMP_STATE.GROUNDED;
+        if(isGameOver())
+        {
+            timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_OVER;
+        }
+        else
+        {
+            restartLevel();
+        }
+    }
+
     @Override
     public boolean keyUp(int keycode)
     {
@@ -454,6 +476,5 @@ public class GameController extends InputAdapter
     {
         worldPosition = cameraHelper.camera.unproject(new Vector3(screenX, screenY, 0));
         return true;
-        //return super.touchDown(screenX, screenY, pointer, button);
     }
 }
