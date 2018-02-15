@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.I18NBundle;
 import com.valentine18.game.core.Constants;
 
 /**
@@ -20,16 +21,12 @@ public class Assets implements Disposable, AssetErrorListener
 {
 
     public PlayerAsset player;
+    public Player2Asset player2;
     public LevelDecorationAssets levelDecorations;
-    /*
-    public RockAsset rock;
-    public GoldenCoinAsset goldenCoin;
-    public FeatherAsset feather;
-    */
-
 
     public AssetFonts fonts;
 
+    public I18NBundle strings;
 
     public static final String TAG = Assets.class.getName();
 
@@ -53,7 +50,7 @@ public class Assets implements Disposable, AssetErrorListener
         // enable texture filtering for pixel smoothing
         for(Texture t : atlas.getTextures())
         {
-            t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            t.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         }
 
         TextureAtlas levelDecorationAtlas = assetManager.get(Constants.TEXTURE_ATLAS_OBJECTS_02);
@@ -61,22 +58,20 @@ public class Assets implements Disposable, AssetErrorListener
         // enable texture filtering for pixel smoothing
         for(Texture t : atlas.getTextures())
         {
-            t.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+            t.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         }
 
         // create game resource objects
         fonts = new AssetFonts();
 
         player = new PlayerAsset(atlas);
+        player2 = new Player2Asset(atlas);
 
         // Level Decorations
         levelDecorations = new LevelDecorationAssets(levelDecorationAtlas);
 
-        /*
-        rock = new RockAsset(atlas);
-        feather = new FeatherAsset(atlas);
-        goldenCoin = new GoldenCoinAsset(atlas);
-        */
+        // Get the strings
+        strings = assetManager.get(Constants.I18N_BUNDLE, I18NBundle.class);
 
         initTiledMap();
     }
@@ -95,19 +90,51 @@ public class Assets implements Disposable, AssetErrorListener
         // start loading assets and wait until finished
         assetManager.finishLoading();
 
+        // Load strings resource file
+        assetManager.load(Constants.I18N_BUNDLE, I18NBundle.class);
+        // start loading assets and wait until finished
+        assetManager.finishLoading();
+
         Gdx.app.debug(TAG, "# of assets loaded: " + assetManager.getAssetNames().size);
     }
 
     private void initTiledMap()
     {
-        assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load(Constants.TILE_MAP_LEVEL_01, TiledMap.class);
+        TmxMapLoader tmxMapLoader = new TmxMapLoader(new InternalFileHandleResolver());
+        TmxMapLoader.Parameters params = new TmxMapLoader.Parameters();
+        params.textureMagFilter = Texture.TextureFilter.Nearest;
+        params.textureMinFilter = Texture.TextureFilter.Nearest;
+
+        assetManager.setLoader(TiledMap.class, tmxMapLoader);
+        assetManager.load(Constants.TILE_MAP_LEVEL_01, TiledMap.class, params);
+        assetManager.finishLoading();
+
+        assetManager.setLoader(TiledMap.class, tmxMapLoader);
+        assetManager.load(Constants.TILE_MAP_LEVEL_02, TiledMap.class, params);
+        assetManager.finishLoading();
+
+        assetManager.setLoader(TiledMap.class, tmxMapLoader);
+        assetManager.load(Constants.TILE_MAP_LEVEL_03, TiledMap.class, params);
         assetManager.finishLoading();
     }
 
-    public TiledMap getTiledMap()
+    public TiledMap getTiledMap(int lvl)
     {
-        TiledMap tm = assetManager.get(Constants.TILE_MAP_LEVEL_01);
+        TiledMap tm;
+
+        switch(lvl)
+        {
+            case 2:
+                tm = assetManager.get(Constants.TILE_MAP_LEVEL_02);
+                break;
+            case 3:
+                tm = assetManager.get(Constants.TILE_MAP_LEVEL_03);
+                break;
+            default:
+                tm = assetManager.get(Constants.TILE_MAP_LEVEL_01);
+                break;
+        }
+
         return tm;
     }
 

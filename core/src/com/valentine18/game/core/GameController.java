@@ -14,6 +14,7 @@ import com.valentine18.game.core.assets.Assets;
 import com.valentine18.game.objects.Goal;
 import com.valentine18.game.objects.Player;
 import com.valentine18.game.objects.Player.JUMP_STATE;
+import com.valentine18.game.screens.GameScreen;
 import com.valentine18.game.screens.MenuScreen;
 
 import static com.valentine18.game.core.Constants.CELL_SIZE;
@@ -41,6 +42,7 @@ public class GameController extends InputAdapter
     public int score;
     public float livesVisual;
     public float scoreVisual;
+    public int currentLevel;
 
     Player player = null;
     Goal goal = null;
@@ -56,8 +58,9 @@ public class GameController extends InputAdapter
     {
         Gdx.input.setInputProcessor(this);
         cameraHelper = new CameraHelper();
-        //TODO: Create parameter, implement saving and reading
-        lives = Constants.LIVES_START;
+        goalReached = false;
+        lives = GamePreferences.instance.playerLives;
+        currentLevel = GamePreferences.instance.currentLevel;
         livesVisual = lives;
         timeLeftGameOverDelay = 0;
         initLevel();
@@ -67,7 +70,7 @@ public class GameController extends InputAdapter
     {
         score = 0;
         scoreVisual = score;
-        level = new Level();
+        level = new Level(currentLevel);
         player = level.player;
         goal = level.goal;
         cameraHelper.setTarget(player);
@@ -75,7 +78,17 @@ public class GameController extends InputAdapter
 
     private void restartLevel()
     {
-        player.position.set(0,260);
+        // Player position according to Level
+        switch (currentLevel)
+        {
+            case 2:
+                player.position.set(0,680);
+                break;
+            case 3:
+            default:
+                player.position.set(0,250);
+                break;
+        }
     }
 
     public void update(float deltaTime)
@@ -86,7 +99,15 @@ public class GameController extends InputAdapter
             timeLeftGameOverDelay -= deltaTime;
             if (timeLeftGameOverDelay < 0)
             {
-                backToMenu();
+                if(isGameOver() || (goalReached && currentLevel == 3))
+                {
+                    backToMenu();
+                }
+                else
+                {
+                    nextLevel();
+                }
+                return;
             }
         }
         else
@@ -99,7 +120,7 @@ public class GameController extends InputAdapter
 
         cameraHelper.update(deltaTime);
 
-        if (!isGameOver() && isPlayerInWater())
+        if (!isGameOver() && isPlayerOffscreen())
         {
             lives--;
             if (isGameOver())
@@ -139,34 +160,15 @@ public class GameController extends InputAdapter
     {
         if (cameraHelper.hasTarget(player))
         {
-            // Player Movement
-            // TODO: Remove Auto-movement if not needed
+            // Player Movement (Automatically)
             if(goalReached)
             {
-                player.velocity.x = 0;
                 player.velocity.y = 0;
             }
             else
             {
                 player.velocity.x = player.terminalVelocity.x;
             }
-
-            /*if (Gdx.input.isKeyPressed(Input.Keys.A))
-            {
-                player.velocity.x = -player.terminalVelocity.x;
-            }
-            else if (Gdx.input.isKeyPressed(Input.Keys.D))
-            {
-                player.velocity.x = player.terminalVelocity.x;
-            }
-            else
-            {
-                // Execute auto-forward movement on non-desktop platform
-                if (Gdx.app.getType() != Application.ApplicationType.Desktop)
-                {
-                    player.velocity.x = player.terminalVelocity.x;
-                }
-            }*/
 
             // Player Jump
             if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Input.Keys.SPACE))
@@ -182,8 +184,16 @@ public class GameController extends InputAdapter
 
     private void backToMenu()
     {
+        saveGameState();
         // switch to Menu Screen
         game.setScreen(new MenuScreen(game));
+    }
+
+    private void nextLevel()
+    {
+        saveGameState();
+        // switch to Menu Screen
+        game.setScreen(new GameScreen(game));
     }
 
     public boolean isGameOver ()
@@ -191,12 +201,12 @@ public class GameController extends InputAdapter
         return lives < 0;
     }
 
-    public boolean isPlayerInWater ()
+    public boolean isPlayerOffscreen()
     {
         return player.position.y < -5;
     }
 
-    /* // TODO: Implement similar logic for enemies
+    /* // TODO: Implement similar logic for enemies - ADD ENEMIES
     private void onCollisionPlayerWithGoldCoin(GoldenCoin goldcoin)
     {
         goldcoin.collected = true;
@@ -213,7 +223,7 @@ public class GameController extends InputAdapter
 
         TiledMapTileLayer.Cell tiledMapCell;
 
-        TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) Assets.instance.getTiledMap().getLayers().get("Tiledmap");
+        TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer) Assets.instance.getTiledMap(currentLevel).getLayers().get("Tiledmap");
 
         // LEFT BOTTOM CELL -------------------------
         xPos = player.position.x + player.bounds.x;
@@ -351,28 +361,14 @@ public class GameController extends InputAdapter
             }
         }
 
-        /* // TODO: Implement similar collision for enemies
-        // Test collision: Player <-> Gold Coins
-        for (GoldenCoin goldenCoin : level.goldcoins)
-        {
-            if (goldenCoin.collected) continue;
+        // TODO: Implement similar collision as GOAL for enemies
 
-            Rectangle rectanglePlayer, rectangleCoin;
-
-            rectanglePlayer = new Rectangle(player.position.x + player.bounds.x, player.position.y, player.bounds.width, player.bounds.height);
-            rectangleCoin = new Rectangle(goldenCoin.position.x, goldenCoin.position.y, goldenCoin.bounds.width, goldenCoin.bounds.height);
-
-            if (!rectanglePlayer.overlaps(rectangleCoin)) continue;
-
-            onCollisionPlayerWithGoldCoin(goldenCoin);
-            break;
-        }
-        */
     }
 
     private void onCollisionPlayerWithGoal()
     {
         goalReached = true;
+        currentLevel = currentLevel == 3 ? 1 : currentLevel + 1;
         timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_FINISHED;
         player.velocity.x = 0;
     }
@@ -438,6 +434,7 @@ public class GameController extends InputAdapter
     {
         lives--;
         player.jumpState = JUMP_STATE.GROUNDED;
+
         if(isGameOver())
         {
             timeLeftGameOverDelay = Constants.TIME_DELAY_GAME_OVER;
@@ -454,7 +451,9 @@ public class GameController extends InputAdapter
         // Reset game world
         if(keycode == Input.Keys.HOME)
         {
-            init();
+            currentLevel = currentLevel == 3 ? 1 : currentLevel + 1;
+            saveGameState();
+            nextLevel();
             Gdx.app.debug(TAG, "Game world reset");
         }
         // Toggle camera follow
@@ -471,10 +470,22 @@ public class GameController extends InputAdapter
         return false;
     }
 
+    public boolean isGoalReached()
+    {
+        return goalReached;
+    }
+
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button)
     {
         worldPosition = cameraHelper.camera.unproject(new Vector3(screenX, screenY, 0));
         return true;
+    }
+
+    private void saveGameState()
+    {
+        GamePreferences.instance.playerLives = lives;
+        GamePreferences.instance.currentLevel = currentLevel;
+        GamePreferences.instance.save();
     }
 }

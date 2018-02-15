@@ -25,10 +25,12 @@ public final class Constants
     public static final String TEXTURE_ATLAS_OBJECTS_02 = "levels/tileset_valentine_02.atlas";
 
     // Game UI Font
-    public static final String GAME_UI_FONT = "images/arial-15.fnt";
+    public static final String GAME_UI_FONT = "images/verdana.fnt";//"images/arial-15.fnt";
 
     // Location of description file for texture atlas
     public static final String TILE_MAP_LEVEL_01 = "levels/level01.tmx";
+    public static final String TILE_MAP_LEVEL_02 = "levels/level02.tmx";
+    public static final String TILE_MAP_LEVEL_03 = "levels/level03.tmx";
 
     public static final String TEXTURE_ATLAS_UI = "images/valentine18-ui.pack.atlas";
     public static final String TEXTURE_ATLAS_LIBGDX_UI = "images/uiskin.atlas";
@@ -44,12 +46,15 @@ public final class Constants
     public static final float TIME_DELAY_GAME_OVER = 3;
 
     // Amount of lives at game start
-    public static final int LIVES_START = 3;
+    public static final int MAX_PLAYER_LIVES = 3;
 
     // Cell Size for each cell in Tiled Map
     public static final float CELL_SIZE = 48.0f;
 
     // Delay Time after game finished
     public static final float TIME_DELAY_GAME_FINISHED = 6;
+
+    // Strings resource file
+    public static final String I18N_BUNDLE = "strings/strings";
 
 }

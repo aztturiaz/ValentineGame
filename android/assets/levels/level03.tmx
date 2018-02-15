@@ -276,12 +276,12 @@
  </tileset>
  <layer name="Background" width="150" height="20">
   <data encoding="base64" compression="zlib">
-   eJztw0ENAAAMA6GTVf/KJmMfSFg1VVVVVVVVVVVVVVV9frETkF8=
+   eJztzjENADAMA7DwGYHwR9a/AzBp8uHfTVIAAAAAAAAAAPjcWV5/AACA2wBQzZAr
   </data>
  </layer>
  <layer name="Tiledmap" width="150" height="20">
   <data encoding="base64" compression="zlib">
-   eJztlkEOgkAMRVmKKza68hwmrriKR/GoHsUhsclk0o6dtgwY/ksaElAY2jelwwAAAAAAAAAAAAAAAAAAANDOnGL8xrzxWvbOdRhe93RsDc/zrq4V90Wbn396px6cjGEh7fOn5/9cjdeuZ0tOjuoZ1WV5Z+rnF2NYnuvtd5GOax1tyYnkWatjUk/fa6/nanIzhgaqXc0FLle5/zkRjhNaR1tyUvPMsraxCM8+iibfl1xNrF5pZg7KQ80FLldSPTyO5yzfY62j1vyUnklY59tyz03pPo90pJiYZ9FvymvL+fLc+cdaI3oTF5p5o+YuweVdqkdE76TQ3isqX8nld3nvfN7sNeN64Grr6U2ant/aCwmunlKdPV5pv/8lUfmS+o51vrV+/z2s5VJkENFeaWez3l5JPScih73Y2pktvWqdzXp5ZenpR/TqAykvVt4=
+   eJztl00OgyAQhenCRePC2J0bD2DXbj2bRy9GSCZThLF2kNr3JS8iKobhDT/GAAAAAAAAcD5V4l6LyerhZMtzpt+CC5LLsyAvk9GZG7TaBWXh1xiMNZAwWp+MJ/5/j1/h7fLw/rkztU4AfIL3z5OpcfJc6UxF+5JSqK+pc23ozLDkL48x16/Sm/d5yfunZeqcJMQ8V22UU99dDR7fkKTQcazN6kl7nWldrRRPSX4s8v5pmPb4qlRK2nfx+IYUoydlur5QX/I6DST5QeelLYHvkIpzKtbUJ3R9ob7kdZybza9hvSbZeleSH3Regq90kfhqYKLn8Ya1FRo/yVqzZ0xD70r6cTSHgBxJrGN7rm5nW/DVfyCJdWzPpe2r0LoHX5XP0fjnmK/4M/iqfOAr+EoDSaxfgZs2dw==
   </data>
  </layer>
 </map>

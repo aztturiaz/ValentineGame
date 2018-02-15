@@ -90,6 +90,9 @@ public class MenuScreen extends AbstractGameScreen
         stage = new Stage(new StretchViewport(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT));
         Gdx.input.setInputProcessor(stage);
         rebuildStage();
+
+        loadSettings();
+        saveSettings();
     }
 
     @Override
@@ -295,11 +298,10 @@ public class MenuScreen extends AbstractGameScreen
     private void saveSettings()
     {
         GamePreferences prefs = GamePreferences.instance;
-        prefs.sound = chkSound.isChecked();
-        prefs.volSound = sldSound.getValue();
-        prefs.music = chkMusic.isChecked();
-        prefs.volMusic = sldMusic.getValue();
-        prefs.showFpsCounter = chkShowFpsCounter.isChecked();
+        if(prefs.playerLives <= 0)
+        {
+            prefs.playerLives = Constants.MAX_PLAYER_LIVES;
+        }
         prefs.save();
     }
 
@@ -338,21 +340,8 @@ public class MenuScreen extends AbstractGameScreen
         game.setScreen(new GameScreen(game));
     }
 
-    private void onOptionsClicked()
-    {
-        loadSettings();
-        btnMenuPlay.setVisible(false);
-        btnMenuOptions.setVisible(false);
-        winOptions.setVisible(true);
-    }
-
     private void loadSettings() {
         GamePreferences prefs = GamePreferences.instance;
         prefs.load();
-        chkSound.setChecked(prefs.sound);
-        sldSound.setValue(prefs.volSound);
-        chkMusic.setChecked(prefs.music);
-        sldMusic.setValue(prefs.volMusic);
-        chkShowFpsCounter.setChecked(prefs.showFpsCounter);
     }
 }

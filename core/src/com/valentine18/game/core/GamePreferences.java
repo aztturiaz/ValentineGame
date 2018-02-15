@@ -19,6 +19,8 @@ public class GamePreferences
     public float volSound;
     public float volMusic;
     public boolean showFpsCounter;
+    public int currentLevel;
+    public int playerLives;
     private Preferences prefs;
 
     // singleton: prevent instantiation from other classes
@@ -29,20 +31,14 @@ public class GamePreferences
 
     public void load ()
     {
-        sound = prefs.getBoolean("sound", true);
-        music = prefs.getBoolean("music", true);
-        volSound = MathUtils.clamp(prefs.getFloat("volSound", 0.5f), 0.0f, 1.0f);
-        volMusic = MathUtils.clamp(prefs.getFloat("volMusic", 0.5f), 0.0f, 1.0f);
-        showFpsCounter = prefs.getBoolean("showFpsCounter", false);
+        currentLevel = prefs.getInteger("currentLevel", 1);
+        playerLives = prefs.getInteger("playerLives", 3);
     }
 
     public void save ()
     {
-        prefs.putBoolean("sound", sound);
-        prefs.putBoolean("music", music);
-        prefs.putFloat("volSound", volSound);
-        prefs.putFloat("volMusic", volMusic);
-        prefs.putBoolean("showFpsCounter", showFpsCounter);
+        prefs.putInteger("currentLevel", currentLevel);
+        prefs.putInteger("playerLives", playerLives);
         prefs.flush();
     }
 }

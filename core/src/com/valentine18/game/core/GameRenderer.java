@@ -1,5 +1,6 @@
 package com.valentine18.game.core;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -71,10 +72,10 @@ public class GameRenderer implements Disposable
     }
 
     private void renderGuiExtraLive (SpriteBatch batch) {
-        float x = cameraGUI.viewportWidth - 50 - Constants.LIVES_START * 50;
+        float x = cameraGUI.viewportWidth - 50 - Constants.MAX_PLAYER_LIVES * 50;
         float y = -15;
 
-        for (int i = 0; i < Constants.LIVES_START; i++)
+        for (int i = 0; i < Constants.MAX_PLAYER_LIVES; i++)
         {
             if (gameController.lives <= i)
             {
@@ -106,22 +107,56 @@ public class GameRenderer implements Disposable
 
         // draw extra lives icon + text (anchored to top right edge)
         renderGuiExtraLive(batch);
+        // draw Level information message
+        renderGuiLevelMessage(batch);
         // draw game over text
         renderGuiGameOverMessage(batch);
+        // draw Goal message
+        renderGuiGoalMessage(batch);
 
         batch.end();
+    }
+
+    private void renderGuiLevelMessage (SpriteBatch batch)
+    {
+        BitmapFont fontGUI = Assets.instance.fonts.defaultSmall;
+        fontGUI.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+        fontGUI.draw(batch, "Level: " + GamePreferences.instance.currentLevel, 5, 10, 0, Align.left, false);
     }
 
     private void renderGuiGameOverMessage (SpriteBatch batch)
     {
         float x = cameraGUI.viewportWidth / 2;
         float y = cameraGUI.viewportHeight / 2;
-        if (gameController.isGameOver()) {
-            BitmapFont fontGameOver = Assets.instance.fonts.defaultBig;
-            fontGameOver.setColor(1, 0.75f, 0.25f, 1);
-            //fontGameOver.drawMultiLine(batch, "GAME OVER", x, y, 0, BitmapFont.HAlignment.CENTER);
-            fontGameOver.draw(batch, "GAME OVER", x, y, 0, Align.center, false);
-            fontGameOver.setColor(1, 1, 1, 1);
+        if (gameController.isGameOver())
+        {
+            BitmapFont fontGameOver = Assets.instance.fonts.defaultNormal;
+            fontGameOver.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+            fontGameOver.draw(batch, Assets.instance.strings.get("gameover"), x, y, 0, Align.center, false);
+        }
+    }
+
+    private void renderGuiGoalMessage (SpriteBatch batch)
+    {
+        float x = cameraGUI.viewportWidth / 2;
+        float y = 100;
+        if (gameController.isGoalReached())
+        {
+            BitmapFont fontGameOver = Assets.instance.fonts.defaultNormal;
+            fontGameOver.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+            switch(GamePreferences.instance.currentLevel)
+            {
+                case 1:
+                    fontGameOver.draw(batch, Assets.instance.strings.get("level01goal"), x, y, 0, Align.center, true);
+                    break;
+                case 2:
+                    fontGameOver.draw(batch, Assets.instance.strings.get("level02goal"), x, y, 0, Align.center, true);
+                    break;
+                case 3:
+                    fontGameOver.draw(batch, Assets.instance.strings.get("level03goal"), x, y, 0, Align.center, true);
+                    break;
+            }
+
         }
     }
 

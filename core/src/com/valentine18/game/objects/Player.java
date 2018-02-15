@@ -50,7 +50,7 @@ public class Player extends AbstractGameObject
 
     public void init()
     {
-        dimension.set(30,48);
+        dimension.set(30.0f, 48.0f);
 
         walkAnimation = Assets.instance.player.playerWalk;
         setAnimation(walkAnimation);
@@ -114,9 +114,6 @@ public class Player extends AbstractGameObject
     public void render (SpriteBatch batch)
     {
         TextureRegion reg;
-
-        // TODO: Implement Texture according to JumpState or Velocity.x
-        // reg = this.regBody;
 
         if(velocity.x == 0)
         {
